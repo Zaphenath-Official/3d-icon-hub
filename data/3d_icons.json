@@ -1,0 +1,6 @@
+[
+    {
+        "instruction": "Generate a 3D low-poly glossy blue cube icon.",
+        "output": "import bpy\n\n# Clear default objects\nbpy.ops.object.select_all(action='SELECT')\nbpy.ops.object.delete(use_global=False)\n\n# Add a cube\nbpy.ops.mesh.primitive_cube_add(size=2, enter_editmode=False, align='WORLD', location=(0, 0, 0))\ncube = bpy.context.active_object\n\n# Create a shiny blue material\nmat = bpy.data.materials.new(name=\"GlossyBlue\")\nmat.use_nodes = True\nnodes = mat.node_tree.nodes\nprincipled = nodes.get(\"Principled BSDF\")\nprincipled.inputs['Base Color'].default_value = (0.0, 0.2, 0.8, 1.0)\nprincipled.inputs['Roughness'].default_value = 0.1\ncube.data.materials.append(mat)\n\n# Export to GLTF format\nbpy.ops.export_scene.gltf(filepath=\"output.gltf\", export_format='GLTF_EMBEDDED')\n"
+    }
+]
